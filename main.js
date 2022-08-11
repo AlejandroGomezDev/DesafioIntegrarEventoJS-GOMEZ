@@ -27,18 +27,19 @@ cuestionario.push(pregunta4)
 //funcion para que pregunten al usuario
 //La respuesta hace push a otra array que mas abajo explico mi intencion con esto.
 //interactua con funcion marcador, para devolver cuantas preguntas contesto bien el usuario
-function preguntaHecha(){
-    let eleccion = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[0].pregunta}\n1.${cuestionario[0].opcion1}\n2.${cuestionario[0].opcion2}\n3.${cuestionario[0].opcion3}\n4.${cuestionario[0].opcion4}\nElija con el numero que corresponda`)
-    opcionElegida.push(eleccion)
-    let eleccion2 = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[1].pregunta}\n1.${cuestionario[1].opcion1}\n2.${cuestionario[1].opcion2}\n3.${cuestionario[1].opcion3}\n4.${cuestionario[1].opcion4}\nElija con el numero que corresponda`)
-    opcionElegida.push(eleccion2)
-    let eleccion3 = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[2].pregunta}\n1.${cuestionario[2].opcion1}\n2.${cuestionario[2].opcion2}\n3.${cuestionario[2].opcion3}\n4.${cuestionario[2].opcion4}\nElija con el numero que corresponda`)
-    opcionElegida.push(eleccion3)
-    let eleccion4 = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[3].pregunta}\n1.${cuestionario[3].opcion1}\n2.${cuestionario[3].opcion2}\n3.${cuestionario[3].opcion3}\n4.${cuestionario[3].opcion4}\nElija con el numero que corresponda`)
-    opcionElegida.push(eleccion4)
+// function preguntaHecha(){
+//     let eleccion = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[0].pregunta}\n1.${cuestionario[0].opcion1}\n2.${cuestionario[0].opcion2}\n3.${cuestionario[0].opcion3}\n4.${cuestionario[0].opcion4}\nElija con el numero que corresponda`)
+//     opcionElegida.push(eleccion)
+//     let eleccion2 = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[1].pregunta}\n1.${cuestionario[1].opcion1}\n2.${cuestionario[1].opcion2}\n3.${cuestionario[1].opcion3}\n4.${cuestionario[1].opcion4}\nElija con el numero que corresponda`)
+//     opcionElegida.push(eleccion2)
+//     let eleccion3 = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[2].pregunta}\n1.${cuestionario[2].opcion1}\n2.${cuestionario[2].opcion2}\n3.${cuestionario[2].opcion3}\n4.${cuestionario[2].opcion4}\nElija con el numero que corresponda`)
+//     opcionElegida.push(eleccion3)
+//     let eleccion4 = prompt(`${cuestionario[0].pregunta} \nLas opciones son: \n${cuestionario[3].pregunta}\n1.${cuestionario[3].opcion1}\n2.${cuestionario[3].opcion2}\n3.${cuestionario[3].opcion3}\n4.${cuestionario[3].opcion4}\nElija con el numero que corresponda`)
+//     opcionElegida.push(eleccion4)
 
-    marcador()
-}
+//     marcador()
+// }
+
 
 //En esta parte quise crear un array que contenga ya el numero que son las preguntas correctas del cuestionario, queria ver si se podia hacer algo asi de comparar arrays con un ciclo, para comparar lo que ingresa con las correctas. En el futuro calculo que usare otro metodo o solo if... porque quisiera que las opciones vayan apareciendo de forma aleatoria y no en un orden ya establecido
 const correctas = [1,2,4,3]
@@ -67,8 +68,8 @@ function marcador(){
 //la verdad no sabia como implementar todavia un metodo, pero como mas adelante el usuario va a poder elegir tambie el tipo de preguntas que quiera, por eso le agregue el parametro tipo
 //asi que el filter seria bueno para que busque solo preguntas de por ejemplo, deportes.
 
-const resultado = cuestionario.filter((el) => el.tipo == 'Deportes')
-console.log(resultado);
+// const resultado = cuestionario.filter((el) => el.tipo == 'Deportes')
+// console.log(resultado);
 
 //Plantilla
 
@@ -79,7 +80,7 @@ cuestionario.forEach((preguntaFormulada)=>{
                             <div class="container">
                                 <section id="pregunta">
                                 <h3>${preguntaFormulada.pregunta}</h3>
-                                <label>
+                                <label class="respuestaBtn">
                                     <input type="radio" value="1" name="pregunta">${preguntaFormulada.opcion1}
                                     <input type="radio" value="2" name="pregunta">${preguntaFormulada.opcion2}
                                     <input type="radio" value="3" name="pregunta">${preguntaFormulada.opcion3}
@@ -90,5 +91,21 @@ cuestionario.forEach((preguntaFormulada)=>{
                             </article>`
     divPreguntas.appendChild(nuevaPregunta) 
 })
-                          
 
+
+  //Hola Nico, te entrego lo que pude hacer, estoy medio complicado con el tema del laburo que se me complica estas ultimas 2 semanas seguir las clases, las pude ver pero por ejemplo los afters no vi ninguno de las ultmas clases. 
+  //Te entrego esto para no entregar nada, de lo que entendi, y para poder sacar el prompt y agregar eventos. No puedo hacer que me tome el value que pongo en el html. Y tampoco se para que me deje marcado las respuestas anteiores y no que al saltar a otra pregunta me destilda la anterior. Se que hay algo mal en la parte de la function de preguntaHecha porque el log me tira undefined.                    
+
+function preguntaHecha(){
+    let eleccion = document.getElementsByClassName("respuestaBtn")
+    for(let boton of eleccion){
+        boton.addEventListener("input", () => {opcionElegida.push(eleccion.value)})
+        console.log(eleccion.value);
+    }
+    
+    marcador()
+}
+console.log(preguntaHecha());
+
+let btnResultado = document.getElementById("resultadoBtn")
+btnResultado.addEventListener("click", preguntaHecha)
