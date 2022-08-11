@@ -99,7 +99,7 @@ cuestionario.forEach((preguntaFormulada)=>{
 function preguntaHecha(){
     let eleccion = document.getElementsByClassName("respuestaBtn")
     for(let boton of eleccion){
-        boton.addEventListener("input", () => {opcionElegida.push(eleccion.value)})
+        boton.onclick = () => {opcionElegida.push(eleccion.value)}
         console.log(eleccion.value);
     }
     
